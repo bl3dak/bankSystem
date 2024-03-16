@@ -14,4 +14,5 @@ class person {
     public double getMoney(){
         return this.money;
     }
+
 }

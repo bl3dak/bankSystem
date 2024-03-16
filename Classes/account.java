@@ -19,6 +19,9 @@ class account {
     public double getMoneyInAccount(){
         return this.moneyInAccount;
     }
-
+    
+    public void setMoney(double moneyToChange){
+        this.moneyInAccount += moneyToChange;
+    }
     
 }

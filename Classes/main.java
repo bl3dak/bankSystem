@@ -117,7 +117,7 @@ class MainClass {
         createMenu();
     }
 
-    public void loginAccount(String personName){
+    public void loginAccount(person Person){
         System.out.println("Now you can login to your account, to do so first type your username and then your password");
 
         boolean accountExists = false;
@@ -131,17 +131,13 @@ class MainClass {
         for(account Account : accounts){
             if(Account.getUserName().equals(userNameLogin) && Account.getPassWord().equals(passWordLogin)){
                 accountExists = true;
-                //eventualMoneyPassVar = Account.getMoneyInAccount();
+                System.out.println("Credentials verified, logging in...");
+                inAccount(Person, Account);
             }
         }
-        if(accountExists){
-            System.out.println("Credentials verified, logging in...");
-
-            inAccount(userNameLogin, passWordLogin, personName);
-        }
-        else{
+        if(!accountExists){
             System.out.println("The given credentials aren't associated to any account, now returning to the main menu...");
-            mainMenu();
+            mainMenu();           
         }
     }
 
@@ -156,57 +152,54 @@ class MainClass {
         for(person Person : persons){
             if(Person.getName().equals(nameUsed)){
                 personExists = true;
+                System.out.println("User found, you will now be prompted to enter your username and password to login to your account." + "\n");
+                loginAccount(Person);
             }
 
         }
-        if(personExists){
-            System.out.println("User found, you will now be prompted to enter your username and password to login to your account." + "\n");
-            loginAccount(nameUsed);
-        }
-        else{
+        if(!personExists){
             System.out.println("User not found, please register yourself first." + "\n");
             mainMenu();
         }
-
-
+    
     }
 
-    public void inAccount(String userName, String passWord, String personName){
-            System.out.println("What do you want to do?");
-            System.out.println("Type 'deposit' to deposit funds to the account");
-            System.out.println("Type 'withdraw' to withdraw funds to the account");
-            System.out.println("Type 'check' to check how much money is currently in the account");
-            System.out.println("Type 'quit' to go back to the main menu");
+    public void inAccount(person Person, account Account){
+            while(true){
+                System.out.println("What do you want to do?");
+                System.out.println("Type 'deposit' to deposit funds to the account");
+                System.out.println("Type 'withdraw' to withdraw funds to the account");
+                System.out.println("Type 'check' to check how much money is currently in the account");
+                System.out.println("Type 'quit' to go back to the main menu");
 
-            String inAccountChoice = sc.nextLine();
+                String inAccountChoice = sc.nextLine();
 
-            switch(inAccountChoice){
-                case "deposit":
-                    System.out.println("How much money do you want to deposit in your account?");
+                switch(inAccountChoice){
+                    case "deposit":
+                        System.out.println("How much money do you want to deposit in your account?");
 
-                    double moneyToDeposit = sc.nextDouble();
-                    double moneyOnPerson;
+                        double moneyToDeposit = sc.nextDouble();
+                        double moneyOnPerson;
 
-                    for(person Person : persons){
-                        if(Person.getName()equals(personName)){
-                            moneyOnPerson = Person.getMoney();
+                        if(Person.getMoney() < moneyToDeposit){
+                            System.out.println("YOU ARE TOO FUCKING POOR TO DEPOSIT THAT MUCH");
                         }
-                    }
+                        else{
+                            System.out.println("You have deposited " + moneyToDeposit + "$ to your bank account");
+                            Account.setMoney(moneyToDeposit);
+                        }
 
-                    if(true){
-                        
-                    }
-                    break;
-                case "withdraw":
-                    break;
-                case "check":
-                    break;
-                case "quit":
-                    mainMenu();
-                    break;
+                        break;
+                    case "withdraw":
+                        break;
+                    case "check":
+                        break;
+                    case "quit":
+                        mainMenu();
+                        break;
+                }
             }
 
-    }
 
-    
+    }
 }
