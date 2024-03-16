@@ -22,17 +22,18 @@ class MainClass {
     public void mainMenu() {
         System.out.println("Type 'create' to initialize a new bank account");
         System.out.println("Type 'login' to access your bank account");
-        System.out.println("Type 'exit' to quit the program");
+        System.out.println("Type 'quit' to quit the program");
 
         String choice = sc.next();
 
         switch (choice) {
             case "create":
-                createAccount();
+                createMenu();
                 break;
             case "login":
+                loginPerson();
                 break;
-            case "exit":
+            case "quit":
                 System.out.println("Exiting...");
                 System.exit(0);
             default:
@@ -41,40 +42,87 @@ class MainClass {
         }
     }
 
-    public void createAccount() {
-        System.out.println("If you haven't done so already, you must register yourself as a person before opening your bank account");
-        System.out.println("Type 'register' to register yourself as a person if you haven't done so already");
-        System.out.println("Type 'login' to log in as a person if you've already completed the registration process");
-        System.out.println("Type 'quit' to return to the main menu");
+    public void createMenu() {
+        System.out.println("If you haven't done so already, you must register yourself as a person before opening your bank account" + "\n");
+        System.out.println("Type 'account' to setup your bank account");
+        System.out.println("Type 'person' to register yourself as a person if you haven't done so already");
+        System.out.println("Type 'back' to return to the main menu");
     
         String personChoice = sc.next();
     
         switch(personChoice) {
-            case "register":
+            case "account":
+                createAccount();
+                break;
+            case "person":
                 registerPerson();
                 break;
-            case "login":
-                loginPerson();
-                break;
-            case "quit":
+
+            case "back":
                 mainMenu();
                 break;
+
             default:
                 System.out.println("Invalid choice. Try again.");
                 createAccount();
         }
     }
-    
+
+    public void createAccount(){
+        System.out.println("What will be your username?");
+            
+        String userName = sc.nextLine();
+
+        System.out.println("And your password?");
+            
+        String passWord = sc.nextLine();
+
+        account Account = new account(userName, passWord);
+
+        accounts.add(Account);
+
+        System.out.println("\n");
+
+        mainMenu();
+    }
+
     public void registerPerson() {
         System.out.println("What name should we register you with?");
+        
         String consumeNextLine = sc.nextLine(); // Consume the newline character
         String nameToRegister = sc.nextLine();
+        
         System.out.println("How much money do you currently have?");
+       
         double moneyOnPerson = sc.nextDouble();
+        
         person Person = new person(nameToRegister, moneyOnPerson);
         persons.add(Person);
+        
         System.out.println("\n");
-        createAccount();
+        
+        createMenu();
+    }
+
+    public void loginAccount(){
+        System.out.println("Now you can login to your account, to do so first type your username and then your password");
+
+        boolean accountExists = false;
+
+        String userNameLogin = sc.nextLine();
+
+        String passWordLogin = sc.nextLine();
+
+        for(account Account : accounts){
+            if(Account.getUserName().equals(userNameLogin) && Account.getPassWord().equals(passWordLogin)){
+                accountExists = true;
+            }
+        }
+        if(accountExists){
+            System.out.println("Credentials verified, logging in...");
+
+            inAccount();
+        }
     }
 
     public void loginPerson(){
@@ -92,17 +140,19 @@ class MainClass {
 
         }
         if(personExists){
-            System.out.println("User found, you will now be prompted to enter your username and password to login to your account.");
+            System.out.println("User found, you will now be prompted to enter your username and password to login to your account." + "\n");
             loginAccount();
         }
         else{
-            System.out.println("There is no person registered with this name, please register first.");
+            System.out.println("User not found, please register yourself first." + "\n");
             mainMenu();
         }
+
+
     }
 
-    public void loginAccount(){
-        
+    public void inAccount(){
+            System.out.println("");
     }
 
     
