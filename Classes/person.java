@@ -15,4 +15,11 @@ class person {
         return this.money;
     }
 
+    public void depositMoney(double moneyToDeposit){
+        this.money -= moneyToDeposit;
+    }
+
+    public void withdrawMoney(double moneyToWithdraw){
+        this.money += moneyToWithdraw;
+    }
 }

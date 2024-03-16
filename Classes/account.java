@@ -20,8 +20,12 @@ class account {
         return this.moneyInAccount;
     }
     
-    public void setMoney(double moneyToChange){
-        this.moneyInAccount += moneyToChange;
+    public void depositMoney(double moneyToDeposit){
+        this.moneyInAccount += moneyToDeposit;
+    }
+
+    public void withdrawMoney(double moneyToWithdraw){
+        this.moneyInAccount -= moneyToWithdraw;
     }
     
 }
