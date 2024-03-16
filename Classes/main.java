@@ -64,18 +64,31 @@ class MainClass {
 
             default:
                 System.out.println("Invalid choice. Try again.");
-                createAccount();
+                createMenu();
         }
     }
 
     public void createAccount(){
-        System.out.println("What will be your username?");
-            
+        System.out.println("Type your new username, no spaces allowed.");
+         
+        boolean spazioUserName = false;
+
+        consumeNextLine = sc.nextLine();
         String userName = sc.nextLine();
 
-        System.out.println("And your password?");
+        if(userName.indexOf(" ") != -1){
+             System.out.println("The username contains a space, you will be sent back to the main menu.");
+             mainMenu();
+        }
+
+        System.out.println("Type your new password, no spaces allowed.");
             
         String passWord = sc.nextLine();
+
+        if(passWord.indexOf(" ") != -1){
+            System.out.println("The password contains a space, you will be sent back to the main menu.");
+            mainMenu();
+       }
 
         account Account = new account(userName, passWord);
 
@@ -104,10 +117,12 @@ class MainClass {
         createMenu();
     }
 
-    public void loginAccount(){
+    public void loginAccount(String personName){
         System.out.println("Now you can login to your account, to do so first type your username and then your password");
 
         boolean accountExists = false;
+
+       // double eventualMoneyPassVar = 0;
 
         String userNameLogin = sc.nextLine();
 
@@ -116,12 +131,17 @@ class MainClass {
         for(account Account : accounts){
             if(Account.getUserName().equals(userNameLogin) && Account.getPassWord().equals(passWordLogin)){
                 accountExists = true;
+                //eventualMoneyPassVar = Account.getMoneyInAccount();
             }
         }
         if(accountExists){
             System.out.println("Credentials verified, logging in...");
 
-            inAccount();
+            inAccount(userNameLogin, passWordLogin, personName);
+        }
+        else{
+            System.out.println("The given credentials aren't associated to any account, now returning to the main menu...");
+            mainMenu();
         }
     }
 
@@ -141,7 +161,7 @@ class MainClass {
         }
         if(personExists){
             System.out.println("User found, you will now be prompted to enter your username and password to login to your account." + "\n");
-            loginAccount();
+            loginAccount(nameUsed);
         }
         else{
             System.out.println("User not found, please register yourself first." + "\n");
@@ -151,8 +171,41 @@ class MainClass {
 
     }
 
-    public void inAccount(){
-            System.out.println("");
+    public void inAccount(String userName, String passWord, String personName){
+            System.out.println("What do you want to do?");
+            System.out.println("Type 'deposit' to deposit funds to the account");
+            System.out.println("Type 'withdraw' to withdraw funds to the account");
+            System.out.println("Type 'check' to check how much money is currently in the account");
+            System.out.println("Type 'quit' to go back to the main menu");
+
+            String inAccountChoice = sc.nextLine();
+
+            switch(inAccountChoice){
+                case "deposit":
+                    System.out.println("How much money do you want to deposit in your account?");
+
+                    double moneyToDeposit = sc.nextDouble();
+                    double moneyOnPerson;
+
+                    for(person Person : persons){
+                        if(Person.getName()equals(personName)){
+                            moneyOnPerson = Person.getMoney();
+                        }
+                    }
+
+                    if(true){
+                        
+                    }
+                    break;
+                case "withdraw":
+                    break;
+                case "check":
+                    break;
+                case "quit":
+                    mainMenu();
+                    break;
+            }
+
     }
 
     
