@@ -2,7 +2,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\sonatafx\\Documents\\java libs\\jBCrypt-0.4.jar",
-        "pkg:maven/com.intellectualsites.fastasyncvoxelsniper/fastasyncvoxelsniper@2.8.0",
         "dependencies/jBCrypt-0.4.jar"
     ]
 }
