@@ -1,4 +1,4 @@
-# Bank Management System
+# Inspired by the need for a simple yet functional bank management system.
 
 This Java program implements a simple bank management system where users can create accounts, deposit and withdraw money, and check their account balance. It utilizes encryption for storing passwords securely using the `BCrypt` library.
 
@@ -37,4 +37,4 @@ Acknowledgments
 
 Thanks to the developers of the BCrypt library for providing secure password hashing functionality.
 
-Inspired by the need for a simple yet functional bank management system.
+
