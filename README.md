@@ -21,11 +21,11 @@ This Java program implements a simple bank management system where users can cre
    ```bash
    git clone https://github.com/bl3dak/bankSystem.git
 
-    Compile the Java files:
+   Compile the Java files:
 
-    bash
+   bash
 
-javac MainClass.java
+
 
 Run the program:
 
