@@ -23,11 +23,9 @@ This Java program implements a simple bank management system where users can cre
 
    Compile the Java files:
 
-bash
 
 
-
-Run the program:
+2) **Run the program**:
 
       java -jar bankSystem.jar
 
