@@ -29,9 +29,9 @@ javac MainClass.java
 
 Run the program:
 
-bash
+java -jar bankSystem.jar
 
-    java MainClass
+    
 
     Follow the on-screen instructions to perform various operations such as creating accounts, logging in, depositing money, and withdrawing money.
 
