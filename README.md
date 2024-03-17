@@ -21,9 +21,6 @@ This Java program implements a simple bank management system where users can cre
    ```bash
    git clone https://github.com/bl3dak/bankSystem.git
 
-   
-
-
 
 2) **Run the program**:
 
@@ -33,7 +30,7 @@ This Java program implements a simple bank management system where users can cre
 
 Follow the on-screen instructions to perform various operations such as creating accounts, logging in, depositing money, and withdrawing money.    
 
-Contributing
+## Contributing
 
 Contributions are welcome! If you find any bugs or want to suggest improvements, please feel free to open an issue or submit a pull request.
 License
