@@ -23,17 +23,17 @@ This Java program implements a simple bank management system where users can cre
 
    Compile the Java files:
 
-   bash
+bash
 
 
 
 Run the program:
 
-java -jar bankSystem.jar
+      java -jar bankSystem.jar
 
     
 
-    Follow the on-screen instructions to perform various operations such as creating accounts, logging in, depositing money, and withdrawing money.
+Follow the on-screen instructions to perform various operations such as creating accounts, logging in, depositing money, and withdrawing money.    
 
 Contributing
 
