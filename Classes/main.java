@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import org.mindrot.jbcrypt.BCrypt;
 
 class MainClass {
     private Scanner sc;
@@ -14,6 +15,28 @@ class MainClass {
         String consumeNextLine;
     }
 
+    public void testEncryption(){
+        System.out.println("Type password to encrypt");
+
+        String salt = BCrypt.gensalt();
+
+        sc.nextLine();
+        String passToEncrypt = sc.nextLine();
+
+        String encryptedPassword = BCrypt.hashpw(passToEncrypt, salt);
+
+        System.out.println("The encryped password is " + encryptedPassword + "\n");
+
+        boolean encryptionCorrect = BCrypt.checkpw(passToEncrypt, encryptedPassword);
+
+        if(encryptionCorrect){
+            System.out.println("The encrypted password matches the one chosen by the user, the encryption worked.");
+        }
+        else{
+            System.out.println("The encrypted password does not match the one given by the user, the encryption failed");
+        }
+    }
+
     public static void main(String[] args) {
         MainClass main = new MainClass();
         main.mainMenu();
@@ -22,7 +45,8 @@ class MainClass {
     public void mainMenu() {
         System.out.println("Type 'create' to initialize a new bank account");
         System.out.println("Type 'login' to access your bank account");
-        System.out.println("Type 'quit' to quit the program");
+        System.out.println("type 'encrypt' to try the encryption algorythm");
+        System.out.println("Type 'quit' to quit the program" + "\n");
 
         String choice = sc.next();
 
@@ -30,12 +54,18 @@ class MainClass {
             case "create":
                 createMenu();
                 break;
+
             case "login":
                 loginPerson();
                 break;
+
+            case "encrypt":
+                testEncryption();
+
             case "quit":
                 System.out.println("Exiting...");
                 System.exit(0);
+
             default:
                 System.out.println("Invalid choice. Try again.");
                 mainMenu();
@@ -46,9 +76,9 @@ class MainClass {
         System.out.println("To be able to open a bank account you must first register yourself as a person" + "\n");
         System.out.println("Type 'register' to register yourself as a person");
         System.out.println("Type 'back' to return to the main menu");
-    
+        
         String personChoice = sc.next();
-    
+        
         switch(personChoice) {
             case "register":
                 registerPerson();
@@ -85,7 +115,11 @@ class MainClass {
             mainMenu();
        }
 
-        account Account = new account(userName, passWord);
+       String salt = BCrypt.gensalt();
+
+       String encryptedPassword = BCrypt.hashpw(passWord, salt);
+
+        account Account = new account(userName, encryptedPassword);
 
         accounts.add(Account);
 
@@ -128,6 +162,11 @@ class MainClass {
     }
 
     public void loginAccount(person Person){
+        if(accounts.size() <= 0){
+            System.out.println("There are currently no accounts created, you will be sent back to the main menu" + "\n");
+            mainMenu();
+        }        
+        
         System.out.println("Now you can login to your account, to do so first type your username");
 
         boolean accountExists = false;
@@ -154,6 +193,11 @@ class MainClass {
     }
 
     public void loginPerson(){
+        if(persons.size() <= 0){
+            System.out.println("There are currently no users registered, you will be sent back to the main menu" + "\n");
+            mainMenu();
+        }
+        
         System.out.println("If you want to log in to your bank account first type the name you registed with.");
         
         consumeNextLine = sc.nextLine();
@@ -225,7 +269,7 @@ class MainClass {
                             Person.withdrawMoney(moneyToWithdraw);
                         }
                     break;
-                    
+
                     case "check":
                         System.out.println("You currently have " + Account.getMoneyInAccount() + "$ in your bank account");
                         break;
