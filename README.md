@@ -33,7 +33,8 @@ Contributions are welcome! If you find any bugs or want to suggest improvements,
 License
 
 This project is licensed under the MIT License.
-Acknowledgments
+
+## Acknowledgments
 
 Thanks to the developers of the BCrypt library for providing secure password hashing functionality.
 
