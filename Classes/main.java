@@ -6,16 +6,18 @@ class MainClass {
     private Scanner sc;
     private ArrayList<person> persons;
     private ArrayList<account> accounts;
+    @SuppressWarnings("unused")
     private String consumeNextLine;
 
     public MainClass() {
         sc = new Scanner(System.in);
         persons = new ArrayList<>();
         accounts = new ArrayList<>();
+        @SuppressWarnings("unused")
         String consumeNextLine;
     }
 
-    public void testEncryption(){
+    /*public void testEncryption(){
         System.out.println("Type password to encrypt");
 
         String salt = BCrypt.gensalt();
@@ -35,7 +37,7 @@ class MainClass {
         else{
             System.out.println("The encrypted password does not match the one given by the user, the encryption failed");
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         MainClass main = new MainClass();
@@ -45,22 +47,19 @@ class MainClass {
     public void mainMenu() {
         System.out.println("Type 'create' to initialize a new bank account");
         System.out.println("Type 'login' to access your bank account");
-        System.out.println("type 'encrypt' to try the encryption algorythm");
         System.out.println("Type 'quit' to quit the program" + "\n");
 
         String choice = sc.next();
 
         switch (choice) {
             case "create":
+                System.out.println("\n");
                 createMenu();
                 break;
 
             case "login":
                 loginPerson();
                 break;
-
-            case "encrypt":
-                testEncryption();
 
             case "quit":
                 System.out.println("Exiting...");
@@ -75,7 +74,7 @@ class MainClass {
     public void createMenu() {
         System.out.println("To be able to open a bank account you must first register yourself as a person" + "\n");
         System.out.println("Type 'register' to register yourself as a person");
-        System.out.println("Type 'back' to return to the main menu");
+        System.out.println("Type 'back' to return to the main menu" + "\n");
         
         String personChoice = sc.next();
         
@@ -85,19 +84,18 @@ class MainClass {
                 break;
 
             case "back":
+                System.out.println("Going back to the main menu..." + "\n");
                 mainMenu();
                 break;
 
             default:
-                System.out.println("Invalid choice. Try again.");
+                System.out.println("Invalid choice. Try again." + "\n");
                 createMenu();
         }
     }
 
     public void createAccount(){
         System.out.println("Type your new username, no spaces allowed.");
-         
-        boolean spazioUserName = false;
 
         String userName = sc.nextLine();
 
@@ -180,9 +178,9 @@ class MainClass {
         String passWordLogin = sc.nextLine();
 
         for(account Account : accounts){
-            if(Account.getUserName().equals(userNameLogin) && Account.getPassWord().equals(passWordLogin)){
+            if(Account.getUserName().equals(userNameLogin) && BCrypt.checkpw(passWordLogin, Account.getPassWord())){
                 accountExists = true;
-                System.out.println("Credentials verified, logging in...");
+                System.out.println("Credentials verified, logging in..." + "\n");
                 inAccount(Person, Account);
             }
         }
@@ -248,7 +246,7 @@ class MainClass {
                             System.out.println("You don't have enough money on you to deposit as much as you want to" + "\n");
                         }
                         else{
-                            System.out.println("You have deposited " + moneyToDeposit + "$ to your bank account");
+                            System.out.println("You have deposited " + moneyToDeposit + "$ to your bank account" + "\n");
                             Account.depositMoney(moneyToDeposit);
                             Person.depositMoney(moneyToDeposit);
                         }
@@ -264,14 +262,14 @@ class MainClass {
                             System.out.println("You don't have enough money in your bank account to withdraw " + moneyToWithdraw + "$ " + "\n");
                         }
                         else{
-                            System.out.println("You have withdrawn " + moneyToWithdraw + "$ from your bank account");
+                            System.out.println("You have withdrawn " + moneyToWithdraw + "$ from your bank account" + "\n");
                             Account.withdrawMoney(moneyToWithdraw);
                             Person.withdrawMoney(moneyToWithdraw);
                         }
                     break;
 
                     case "check":
-                        System.out.println("You currently have " + Account.getMoneyInAccount() + "$ in your bank account");
+                        System.out.println("You currently have " + Account.getMoneyInAccount() + "$ in your bank account" + "\n");
                         break;
 
                     case "quit":
@@ -279,7 +277,7 @@ class MainClass {
                         break;
 
                     default:
-                        System.out.println("Invalid choice. Try again.");
+                        System.out.println("Invalid choice. Try again." + "\n");
                         break;
                 }
             }
