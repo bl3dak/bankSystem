@@ -36,4 +36,5 @@ This project is licensed under the MIT License.
 Acknowledgments
 
 Thanks to the developers of the BCrypt library for providing secure password hashing functionality.
+
 Inspired by the need for a simple yet functional bank management system.
