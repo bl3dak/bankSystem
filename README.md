@@ -19,7 +19,7 @@ This Java program implements a simple bank management system where users can cre
 1. **Clone the repository** to your local machine:
 
    ```bash
-   git clone https://github.com/your_username/repository_name.git
+   git clone https://github.com/bl3dak/bankSystem.git
 
     Compile the Java files:
 
