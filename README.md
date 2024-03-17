@@ -21,7 +21,6 @@ This Java program implements a simple bank management system where users can cre
    ```bash
    git clone https://github.com/bl3dak/bankSystem.git
 
-
 2) **Run the program**:
 
          java -jar bankSystem.jar
